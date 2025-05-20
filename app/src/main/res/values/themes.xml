@@ -1,0 +1,9 @@
+<resources>
+
+    <style name="Base.Theme.Carpage" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.Carpage" parent="Base.Theme.Carpage" />
+</resources>
