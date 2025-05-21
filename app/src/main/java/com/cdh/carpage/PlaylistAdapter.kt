@@ -12,7 +12,7 @@ class PlaylistAdapter(
 ) : RecyclerView.Adapter<PlaylistAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val tvTitle: TextView = itemView.findViewById(android.R.id.text1)
+        val tvTitle: TextView = itemView.findViewById(R.id.text1)
 
         init {
             itemView.setOnClickListener {
@@ -23,7 +23,7 @@ class PlaylistAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            android.R.layout.simple_list_item_1, parent, false
+            R.layout.item_playlist, parent, false
         )
         return ViewHolder(view)
     }

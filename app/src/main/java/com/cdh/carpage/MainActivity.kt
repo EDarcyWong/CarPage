@@ -8,12 +8,14 @@ import android.util.Log
 import android.util.Rational
 import android.view.View
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.OptIn
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.cdh.carpage.databinding.ActivityMainBinding
 import androidx.media3.common.MediaItem
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.ui.PlayerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import java.text.SimpleDateFormat
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initPlaylist() {
+    @OptIn(UnstableApi::class) private fun initPlaylist() {
         // 播放地址列表
         val mediaUrls = listOf(
             "https://www.w3schools.com/html/mov_bbb.mp4",
@@ -66,6 +68,8 @@ class MainActivity : AppCompatActivity() {
         // 构建 MediaItem 列表
         val mediaItems = mediaUrls.map { url -> MediaItem.fromUri(url) }
 
+        playerManager.setPlaylist(mediaItems)
+
         // 设置播放队列并准备
         val player = playerManager.getPlayer()
         player.setMediaItems(mediaItems)
@@ -74,6 +78,8 @@ class MainActivity : AppCompatActivity() {
         // 设置 PlayerView 的 Player
         binding.playerView.player = player
         binding.playerView.useController = true
+
+//        binding.playerView.controllerShowTimeoutMs = 3000 // 控制器3秒后隐藏
 
         binding.playerView.setControllerVisibilityListener(object : PlayerView.ControllerVisibilityListener {
             override fun onVisibilityChanged(visibility: Int) {
@@ -113,6 +119,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnPip.setOnClickListener {
             enterPipMode()
+        }
+
+        binding.btnList.setOnClickListener {
+            val intent = VideoListActivity.newIntent(this@MainActivity)
+            startActivity(intent)
         }
     }
 
